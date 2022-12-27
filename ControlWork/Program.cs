@@ -9,11 +9,13 @@ void ControlWork()
     Console.Write("Задайте количество элементов массива: ");
     int n = Convert.ToInt32(Console.ReadLine());
     string[] inputArray = new string[n];
+    int lenght = 3;
 
     InputArray(inputArray);
     Console.Write("Выводим заданный массив: ");
     PrintArray(inputArray);
-
+    Console.WriteLine();
+    PrintArray(OutputArray(inputArray, lenght));
 }
 ControlWork();
 
@@ -39,3 +41,29 @@ void PrintArray(string[] array)
     Console.Write($"]");
 }
 
+// Рассчитываем длину выходного массива
+int Count(string[] inputArray, int lenght)
+{
+    int count = 0;
+    for (int i = 0; i < inputArray.Length; i++)
+    {
+        if (inputArray[i].Length <= lenght) count++;
+    }
+    return count;
+}
+
+// Формируем выходной массив
+string[] OutputArray(string[] inputArray, int lenght)
+{
+    string[] outputArray = new string[Count(inputArray, lenght)];
+    for (int i = 0, j = 0; i < inputArray.Length; i++)
+    {
+        if (inputArray[i].Length <= lenght)
+        {
+            outputArray[j] = inputArray[i];
+            j++;
+        }
+    }
+    Console.Write("Выводим выходной массив: ");
+    return outputArray;
+}
